@@ -1,7 +1,6 @@
 package com.modarcsoft.app.entities;
 
 import java.util.Date;
-
 import javax.persistence.*;
 
 @Entity
@@ -39,12 +38,16 @@ public class Kullanicilar {
 	@Column
 	private String mail;
 	
-	@Column(name= "olusturulmaTarihi")
+	@Column(name= "olusturulmatarihi")
 	private Date olusturulmaTarihi;
 	
-	@Column(name = "degistirmeTarihi")
+	@Column(name = "degistirmetarihi")
 	private Date degistirmeTarihi;
 	
+	@ManyToOne(fetch= FetchType.LAZY, cascade=CascadeType.ALL) //çoktan bire ilişki
+	@JoinColumn(name= "rol", nullable=false)
+	private Roller roller;
+
 	
 
 	public Kullanicilar() {
