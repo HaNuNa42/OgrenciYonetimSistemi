@@ -19,7 +19,7 @@ public class Dersler {
 	private int bransId;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade=CascadeType.ALL) //çoktan bire ilişki
-	@JoinColumn(name= "bransId", nullable=false)
+	@JoinColumn(name= "bransid", insertable=false, updatable=false) //nullable=false GELECEK
 	private Branslar branslar;
 
 

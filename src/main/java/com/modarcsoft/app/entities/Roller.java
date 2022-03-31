@@ -17,6 +17,6 @@ public class Roller {
 	@Column
 	private String rol;
 	
-	@OneToMany(mappedBy = "kullanicilar") //birden çoka ilişki 
+	@OneToMany(mappedBy = "roller") //birden çoka ilişki 
 	private List<Kullanicilar> kullanicilar = new ArrayList<Kullanicilar>();
 }

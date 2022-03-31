@@ -11,7 +11,10 @@ public class Kullanicilar {
 	@Column(name= "id")
 	private int id;
 	
-	@Column(name= "adi")
+	@Column(name="kullaniciadi")
+	private String kullanciadi;
+	
+	@Column(name="adi")
 	private String adi;
 	
 	@Column(name= "soyadi")
@@ -45,17 +48,14 @@ public class Kullanicilar {
 	private Date degistirmeTarihi;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade=CascadeType.ALL) //çoktan bire ilişki
-	@JoinColumn(name= "rol", nullable=false)
+	@JoinColumn(name= "rol", insertable=false, updatable=false ) //nullable=false gelecek
 	private Roller roller;
 
 	
-
 	public Kullanicilar() {
 		super();
 	}
-	
-	
-
+	 
 	public int getId() {
 		return id;
 	}
@@ -150,6 +150,22 @@ public class Kullanicilar {
 
 	public void setDegistirmeTarihi(Date degistirmeTarihi) {
 		this.degistirmeTarihi = degistirmeTarihi;
+	}
+
+	public String getKullanciadi() {
+		return kullanciadi;
+	}
+
+	public void setKullanciadi(String kullanciadi) {
+		this.kullanciadi = kullanciadi;
+	}
+
+	public Roller getRoller() {
+		return roller;
+	}
+
+	public void setRoller(Roller roller) {
+		this.roller = roller;
 	}
 	
 	
