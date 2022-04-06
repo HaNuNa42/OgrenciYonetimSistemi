@@ -12,7 +12,7 @@ public class Kullanicilar {
 	private int id;
 	
 	@Column(name="kullaniciadi")
-	private String kullanciadi;
+	private String kullaniciadi;
 	
 	@Column(name="adi")
 	private String adi;
@@ -23,6 +23,7 @@ public class Kullanicilar {
 	@Column
 	private String sifre;
 	
+	@Transient
 	@Column(name="sifretekrar")
 	private String sifretekrar;
 	
@@ -152,12 +153,12 @@ public class Kullanicilar {
 		this.degistirmeTarihi = degistirmeTarihi;
 	}
 
-	public String getKullanciadi() {
-		return kullanciadi;
+	public String getKullaniciadi() {
+		return kullaniciadi;
 	}
 
-	public void setKullanciadi(String kullanciadi) {
-		this.kullanciadi = kullanciadi;
+	public void setKullaniciadi(String kullaniciadi) {
+		this.kullaniciadi = kullaniciadi;
 	}
 
 	public Roller getRoller() {

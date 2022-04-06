@@ -3,10 +3,13 @@ package com.modarcsoft.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Objects;
 import com.modarcsoft.app.entities.Kullanicilar;
 import com.modarcsoft.app.repository.KullaniciRepository;
 
+@Service
 public class KullaniciServiceImpl implements KullaniciService {
 
 	@Autowired
@@ -35,13 +38,11 @@ public class KullaniciServiceImpl implements KullaniciService {
 			kullaniciVT.setAdres(kullanici.getAdres());
 		}
 
-		if (Objects.nonNull(kullanici.getMail())
-				&& !"".equalsIgnoreCase(kullanici.getMail())) {
+		if (Objects.nonNull(kullanici.getMail()) && !"".equalsIgnoreCase(kullanici.getMail())) {
 			kullaniciVT.setMail(kullanici.getMail());
 		}
 
-		if (Objects.nonNull(kullanici.getTelefon()) 
-				&& !"".equalsIgnoreCase(kullanici.getTelefon())) {
+		if (Objects.nonNull(kullanici.getTelefon()) && !"".equalsIgnoreCase(kullanici.getTelefon())) {
 			kullaniciVT.setTelefon(kullanici.getTelefon());
 		}
 
@@ -54,11 +55,11 @@ public class KullaniciServiceImpl implements KullaniciService {
 	}
 
 	@Override
-	public Kullanicilar kullaniciadiVeSifreKontrol(Kullanicilar kullanici) {
-		
-			return kullaniciRepository.kullaniciadiVeSifreKontrol(kullanici.getKullanciadi(), kullanici.getSifre());
+	public Kullanicilar kullaniciadiSifre(Kullanicilar kullanici) {
 
-		}
+		return kullaniciRepository.kullaniciadiSifre(kullanici.getKullaniciadi(), kullanici.getSifre());
+
 	}
 
-
+	
+}

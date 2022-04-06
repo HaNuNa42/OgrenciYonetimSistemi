@@ -2,7 +2,9 @@ package com.modarcsoft.app.service;
 
 import java.util.List;
 
+
 import com.modarcsoft.app.entities.Kullanicilar;
+
 
 public interface KullaniciService {
 	
@@ -19,6 +21,6 @@ public interface KullaniciService {
 	void silKullanici(int id);
 	
 	//kullanici kontrol
-	Kullanicilar kullaniciadiVeSifreKontrol(Kullanicilar kullanici);
+	Kullanicilar kullaniciadiSifre(Kullanicilar kullanici);
 
 }

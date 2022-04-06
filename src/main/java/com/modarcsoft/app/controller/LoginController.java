@@ -9,27 +9,28 @@ import org.springframework.web.bind.annotation.*;
 
 import com.modarcsoft.app.entities.Kullanicilar;
 import com.modarcsoft.app.service.KullaniciService;
+import com.modarcsoft.app.service.KullaniciServiceImpl;
 
 //@RestController
 @Controller
 public class LoginController {
-	
-	@Autowired
+
 	private KullaniciService kullaniciService;
-	
+
 	@GetMapping("login")
 	public String login() {
 		return "login";
 	}
-	
-	
-	@RequestMapping(value = "/loginControl", method = RequestMethod.POST)
-	public String controlUser(Kullanicilar kullanici, HttpServletRequest request) {
 
-		Kullanicilar kullanicilar = kullaniciService.kullaniciadiVeSifreKontrol(kullanici);
+	@RequestMapping(value = "/loginControl", method = RequestMethod.POST)
+	public String kullaniciKontrol(Kullanicilar kullanici, Kullanicilar sifre, HttpServletRequest request) {
+
+		System.out.println("aa");
+		Kullanicilar kullanicilar = kullaniciService.kullaniciadiSifre(kullanici);
+		System.out.println("bb");
 		try {
 			if (kullanici != null) {
-				System.out.printf("oturum açıldı", kullanici.getKullanciadi().toString());
+				System.out.printf("oturum açıldı", kullanici.getKullaniciadi().toString());
 
 				request.getSession().setAttribute("kullanici", kullanicilar);
 				request.getSession().setAttribute("id", kullanicilar.getId());
@@ -37,7 +38,7 @@ public class LoginController {
 				return "redirect:/index";
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("oturum açılamadı" + e.toString());
 			return "redirect:/login";
 		}
 		return "redirect:/login";
@@ -49,45 +50,37 @@ public class LoginController {
 
 		return "redirect:/login";
 	}
-	
-	/* 
-    @Autowired private DepartmentService departmentService;
-  
-    // Save operation
-    @PostMapping("/departments")
-    public Department saveDepartment(
-        @Valid @RequestBody Department department)
-    {
-        return departmentService.saveDepartment(department);
-    }
-  
-    // Read operation
-    @GetMapping("/departments")
-    public List<Department> fetchDepartmentList()
-    {
-        return departmentService.fetchDepartmentList();
-    }
-  
-    // Update operation
-    @PutMapping("/departments/{id}")
-    public Department
-    updateDepartment(@RequestBody Department department,
-                     @PathVariable("id") Long departmentId)
-    {
-        return departmentService.updateDepartment(
-            department, departmentId);
-    }
-  
-    // Delete operation
-    @DeleteMapping("/departments/{id}")
-    public String deleteDepartmentById(@PathVariable("id")
-                                       Long departmentId)
-    {
-        departmentService.deleteDepartmentById(
-            departmentId);
-  
-        return "Deleted Successfully";
-    }
-    
-    */
+
+	/*
+	 * @Autowired private DepartmentService departmentService;
+	 * 
+	 * // Save operation
+	 * 
+	 * @PostMapping("/departments") public Department saveDepartment(
+	 * 
+	 * @Valid @RequestBody Department department) { return
+	 * departmentService.saveDepartment(department); }
+	 * 
+	 * // Read operation
+	 * 
+	 * @GetMapping("/departments") public List<Department> fetchDepartmentList() {
+	 * return departmentService.fetchDepartmentList(); }
+	 * 
+	 * // Update operation
+	 * 
+	 * @PutMapping("/departments/{id}") public Department
+	 * updateDepartment(@RequestBody Department department,
+	 * 
+	 * @PathVariable("id") Long departmentId) { return
+	 * departmentService.updateDepartment( department, departmentId); }
+	 * 
+	 * // Delete operation
+	 * 
+	 * @DeleteMapping("/departments/{id}") public String
+	 * deleteDepartmentById(@PathVariable("id") Long departmentId) {
+	 * departmentService.deleteDepartmentById( departmentId);
+	 * 
+	 * return "Deleted Successfully"; }
+	 * 
+	 */
 }
