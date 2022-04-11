@@ -31,6 +31,9 @@ public class Kullanicilar {
 	private int rol;
 	
 	@Column
+	private int brans;
+	
+	@Column
 	private String avatar; //profil resmi
 	
 	@Column
@@ -51,6 +54,10 @@ public class Kullanicilar {
 	@ManyToOne(fetch= FetchType.LAZY, cascade=CascadeType.ALL) //çoktan bire ilişki
 	@JoinColumn(name= "rol", insertable=false, updatable=false ) //nullable=false gelecek
 	private Roller roller;
+	
+	@ManyToOne(fetch= FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name= "brans", insertable=false, updatable=false ) 
+	private Branslar branslar;
 
 	
 	public Kullanicilar() {

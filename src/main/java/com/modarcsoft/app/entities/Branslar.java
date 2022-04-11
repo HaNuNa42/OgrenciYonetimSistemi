@@ -19,4 +19,7 @@ public class Branslar {
 
 	@OneToMany(mappedBy = "branslar") //birden çoka ilişki 
 	private List<Dersler> dersler = new ArrayList<Dersler>();
+	
+	@OneToMany(mappedBy = "brans") 
+	private List<Kullanicilar> kullanicilar = new ArrayList<Kullanicilar>();
 }

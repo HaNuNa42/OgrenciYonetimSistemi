@@ -36,7 +36,7 @@
     <div class="sl-mainpanel">
       <nav class="breadcrumb sl-breadcrumb">
         <a class="breadcrumb-item" href="index.html">Öğrenci Yönetim Sistemi</a>
-        <span class="breadcrumb-item active">Anasayfa</span>
+        <span class="breadcrumb-item active">Tanımlamalar</span>
       </nav>
 
      <!-- sl-pagebody -->
@@ -45,12 +45,12 @@
      
      <div class="sl-pagebody">
         <div class="sl-page-title">
-          <h5>Kullanıcılar</h5>
-          <p>Bu ekranda kullanıcı ile ilgili işlemlerinizi yapabilirsiniz</p>
+          <h5>Tanımlamalar</h5>
+          <p>Bu ekranda sistemdeki tanımlama işlemlerinizi yapabilirsiniz</p>
         </div><!-- sl-page-title -->
 
         <div class="col-sm-6 col-md-3">
-        <button class="btn btn-outline-primary btn-block mg-b-10" data-toggle="modal" data-target="#modalkullanici">Kullanıcı Ekle</button>
+        <button class="btn btn-outline-primary btn-block mg-b-10" data-toggle="modal" data-target="#modaltanim">Tanımlama Ekle</button>
         </div>
 
         <div class="card pd-20 pd-sm-40 mg-t-50">
@@ -58,15 +58,9 @@
             <div id="datatable2_wrapper" class="dataTables_wrapper no-footer"><table id="datatable2" class="table display responsive nowrap dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="datatable2_info" style="width: 1160px;">
               <thead>
                 <tr>
-					<th>Kullanıcı Id</th>
-					<th>Kullanıcı Adı</th>
+					<th>Kod Id</th>
 					<th>Adı</th>
-					<th>Soyadı</th>
-					<th>Telefon</th>
-					<th>Mail</th>
-					<th>Adres</th>
-					<th>Rol</th>
-					<th>Şifre</th>
+					<th>Açıklama</th>
 					<th>İşlemler</th>
 					</tr>
                  </thead>
@@ -76,14 +70,12 @@
                   <td>Satou</td>
                   <td>Accountant</td>
                   <td>2008/11/28</td>
-                  <td>$162,700</td>
                   <td style="display: none;">a.satou@datatables.net</td>
                 </tr><tr role="row" class="even">
                   <td class="sorting_1" tabindex="0">Angelica</td>
                   <td>Ramos</td>
                   <td>Chief Executive Officer</td>
                   <td>2009/10/09</td>
-                  <td>$1,200,000</td>
                   <td style="display: none;">a.ramos@datatables.net</td>
                 </tr></tbody>
             </table><div class="dataTables_info" id="datatable2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div><div class="dataTables_paginate paging_simple_numbers" id="datatable2_paginate"><a class="paginate_button previous disabled" aria-controls="datatable2" data-dt-idx="0" tabindex="0" id="datatable2_previous">Previous</a><span><a class="paginate_button current" aria-controls="datatable2" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="datatable2" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="datatable2" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="datatable2" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="datatable2" data-dt-idx="5" tabindex="0">5</a><a class="paginate_button " aria-controls="datatable2" data-dt-idx="6" tabindex="0">6</a></span><a class="paginate_button next" aria-controls="datatable2" data-dt-idx="7" tabindex="0" id="datatable2_next">Next</a></div></div>
@@ -93,12 +85,12 @@
      
      
        <!-- BASIC MODAL -->
-    <div id="modalkullanici" class="modal fade">
+    <div id="modaltanim" class="modal fade">
   
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content tx-size-sm">
           <div class="modal-header pd-x-20">
-            <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Kullanıcı Ekle</h6>
+            <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Tanımlama Ekle</h6>
             <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -114,18 +106,7 @@
     				<label for="inputPassword4" class="form-label">Soyadı</label>
     				<input type="password" class="form-control" id="soyadi">
   				</div>
-  				<div class="col-md-6">
-    				<label for="inputAddress" class="form-label">Adres</label>
-    				<input type="text" class="form-control" id="adres">
-  				</div>
-  				<div class="col-md-6">
-    				<label for="inputAddress2" class="form-label">Telefon</label>
-    				<input type="text" class="form-control" id="telefon">
-  				</div>
-  				<div class="col-md-6">
-    				<label for="inputCity" class="form-label">Branş</label>
-    				<input type="text" class="form-control" id="brans">
-  				</div>
+  				
   				<div class="form-group col-md-6 mg-b-10-force">
                   <label class="form-control-label">Rol</label>
                   <select class="form-control select2" data-placeholder="rol">
@@ -136,14 +117,7 @@
                     <option value="Japan">Japan</option>
                   </select>
                 </div>
-                <div class="col-md-6">
-    				<label for="inputCity" class="form-label">Şifre</label>
-    				<input type="text" class="form-control" id="sifre">
-  				</div>
-  				<div class="col-md-6">
-    				<label for="inputCity" class="form-label">Şifre Tekrar</label>
-    				<input type="text" class="form-control" id="sifretekrar">
-  				</div>
+                
 			</form>
           </div>
           <div class="modal-footer">
