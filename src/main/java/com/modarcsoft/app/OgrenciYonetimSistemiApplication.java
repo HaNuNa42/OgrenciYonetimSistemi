@@ -8,6 +8,8 @@ public class OgrenciYonetimSistemiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OgrenciYonetimSistemiApplication.class, args);
+		
+		
 	}
 
 }

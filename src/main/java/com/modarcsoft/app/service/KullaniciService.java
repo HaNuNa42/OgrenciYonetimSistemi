@@ -1,5 +1,6 @@
 package com.modarcsoft.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,5 +23,9 @@ public interface KullaniciService {
 	
 	//kullanici kontrol
 	Kullanicilar kullaniciadiSifre(Kullanicilar kullanici);
+
+	ArrayList<Kullanicilar> getResults(Kullanicilar id, String kullaniciadi);
+
+	
 
 }

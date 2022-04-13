@@ -1,18 +1,26 @@
 package com.modarcsoft.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import com.modarcsoft.app.entities.Kullanicilar;
 import com.modarcsoft.app.repository.KullaniciRepository;
 
 @Service
 public class KullaniciServiceImpl implements KullaniciService {
+	
+//	private EntityManager entityManager;
 
-	@Autowired
+	
 	private KullaniciRepository kullaniciRepository;
 
 	@Override
@@ -56,10 +64,34 @@ public class KullaniciServiceImpl implements KullaniciService {
 
 	@Override
 	public Kullanicilar kullaniciadiSifre(Kullanicilar kullanici) {
-
-		return kullaniciRepository.kullaniciadiSifre(kullanici.getKullaniciadi(), kullanici.getSifre());
-
+	
+		try {
+			System.out.println("doğrulama tamam");
+			return kullaniciRepository.kullaniciadiSifre(kullanici.getKullaniciadi(), kullanici.getSifre());
+		}catch (Exception e) {
+			System.out.println("hata :: kullanıcı adı ve şifre hatalı : " + e);
+		}
+		return kullanici;
+		
 	}
 
+	@Override
+	public ArrayList<Kullanicilar> getResults(Kullanicilar id, String kullaniciadi) {
+		System.out.println("burası çalıştı impl 1");
+		
+		if (id != null) {  
+			 System.out.println("burası çalıştı impl 2");
+			if (id.getKullaniciadi() != null && id.getKullaniciadi() != "") {
+				System.out.println("burası çalıştı impl 3");
+				((Query) kullaniciRepository).setParameter("kullaniciadi", id.getKullaniciadi());
+				System.out.println("burası çalıştı impl 4");
+			}
+		}
+		System.out.println("burası çalıştı impl 5");
+		return kullaniciRepository.getResultsKullaniciadi(id, kullaniciadi);
+		
+	}
+	
+	
 	
 }

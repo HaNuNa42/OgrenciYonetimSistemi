@@ -17,7 +17,9 @@
     <link href="../lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <link href="../lib/rickshaw/rickshaw.min.css" rel="stylesheet">
     
-     <link href="../lib/datatables/jquery.dataTables.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="../lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="../lib/select2/css/select2.min.css" rel="stylesheet">
 
     <!-- Starlight CSS -->
@@ -50,7 +52,7 @@
         </div><!-- sl-page-title -->
 
         <div class="col-sm-6 col-md-3">
-        <button class="btn btn-outline-primary btn-block mg-b-10" data-toggle="modal" data-target="#modalkullanici">Kullanıcı Ekle</button>
+        <button class="btn btn-outline-primary btn-block mg-b-10" onclick="yenikullaniciEkle()">Kullanıcı Ekle</button>
         </div>
 
         <div class="card pd-20 pd-sm-40 mg-t-50">
@@ -86,7 +88,7 @@
                   <td>$1,200,000</td>
                   <td style="display: none;">a.ramos@datatables.net</td>
                 </tr></tbody>
-            </table><div class="dataTables_info" id="datatable2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div><div class="dataTables_paginate paging_simple_numbers" id="datatable2_paginate"><a class="paginate_button previous disabled" aria-controls="datatable2" data-dt-idx="0" tabindex="0" id="datatable2_previous">Previous</a><span><a class="paginate_button current" aria-controls="datatable2" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="datatable2" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="datatable2" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="datatable2" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="datatable2" data-dt-idx="5" tabindex="0">5</a><a class="paginate_button " aria-controls="datatable2" data-dt-idx="6" tabindex="0">6</a></span><a class="paginate_button next" aria-controls="datatable2" data-dt-idx="7" tabindex="0" id="datatable2_next">Next</a></div></div>
+             </table></div>
           </div><!-- table-wrapper -->
         </div><!-- card -->
       </div>
@@ -108,11 +110,19 @@
             <form class="row g-3">
   				<div class="col-md-6">
     				<label for="inputEmail4" class="form-label">Adı</label>
-    				<input type="email" class="form-control" id="adi">
+    				<input type="text" class="form-control" id="adi">
   				</div>
   				<div class="col-md-6">
     				<label for="inputPassword4" class="form-label">Soyadı</label>
-    				<input type="password" class="form-control" id="soyadi">
+    				<input type="text" class="form-control" id="soyadi">
+  				</div>
+  				<div class="col-md-6">
+    				<label for="inputPassword4" class="form-label">Kullanıcı adı</label>
+    				<input type="text" class="form-control" id="kullaniciadi">
+  				</div>
+  				<div class="col-md-6">
+    				<label for="inputPassword4" class="form-label">E-mail</label>
+    				<input type="email" class="form-control" id="mail">
   				</div>
   				<div class="col-md-6">
     				<label for="inputAddress" class="form-label">Adres</label>
@@ -124,31 +134,36 @@
   				</div>
   				<div class="col-md-6">
     				<label for="inputCity" class="form-label">Branş</label>
-    				<input type="text" class="form-control" id="brans">
+    				<select id="brans" name="brans" class="form-control">
+						<option value="" selected disabled hidden>Seçiniz...</option>
+						<option value="1">Bilişim</option>
+						<option value="2">Edebiyat</option>
+						<option value="3">Fen</option>
+					</select>
   				</div>
-  				<div class="form-group col-md-6 mg-b-10-force">
-                  <label class="form-control-label">Rol</label>
-                  <select class="form-control select2" data-placeholder="rol">
-                    <option label="Rol seçiniz"></option>
-                    <option value="USA">United States of America</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="China">China</option>
-                    <option value="Japan">Japan</option>
-                  </select>
-                </div>
+  				<div class="col-md-6">
+    				<label for="inputCity" class="form-label">Rol</label>
+    				<select id="rol" name="rol" class="form-control">
+						<option value="" selected disabled hidden>Seçiniz...</option>
+						<option value="1">Admin</option>
+						<option value="2">Öğrenci</option>
+						<option value="3">Öğretmen</option>
+						<option value="4">Personel</option>
+					</select>
+  				</div>
                 <div class="col-md-6">
     				<label for="inputCity" class="form-label">Şifre</label>
     				<input type="text" class="form-control" id="sifre">
   				</div>
   				<div class="col-md-6">
     				<label for="inputCity" class="form-label">Şifre Tekrar</label>
-    				<input type="text" class="form-control" id="sifretekrar">
+    				<input type="password" class="form-control" id="sifretekrar">
   				</div>
 			</form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success pd-x-20">Kaydet</button>
-            <button type="button" class="btn btn-warning pd-x-20">Guncelle</button>
+            <button type="button" class="btn btn-success pd-x-20" id="kaydetbutton" onclick="eklekullanici()">Kaydet</button>
+            <button type="button" class="btn btn-warning pd-x-20" id="guncellebutton" onclick="guncellekullanici()">Guncelle</button>
             <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">İptal</button>
           </div>
         </div>
@@ -182,11 +197,14 @@
     <script src="../js/ResizeSensor.js"></script>
     <script src="../js/dashboard.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
       
     <script src="../lib/highlightjs/highlight.pack.js"></script>
     <script src="../lib/datatables/jquery.dataTables.js"></script>
     <script src="../lib/datatables-responsive/dataTables.responsive.js"></script>
     <script src="../lib/select2/js/select2.min.js"></script>
-
+	<script src="../custom/kullanicilar.js"></script>
+	
   </body>
 </html>

@@ -1,10 +1,13 @@
 package com.modarcsoft.app.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-public class Kullanicilar {
+public class Kullanicilar implements Serializable{
+	
+	private static final long serialVersionUID = 5724727529841302098L; //silme bunu
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +55,7 @@ public class Kullanicilar {
 	private Date degistirmeTarihi;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade=CascadeType.ALL) //çoktan bire ilişki
-	@JoinColumn(name= "rol", insertable=false, updatable=false ) //nullable=false gelecek
+	@JoinColumn(name= "rol", insertable=false, updatable=false)
 	private Roller roller;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade=CascadeType.ALL)
@@ -64,6 +67,28 @@ public class Kullanicilar {
 		super();
 	}
 	 
+	public Kullanicilar(int id, String kullaniciadi, String adi, String soyadi, String sifre, String sifretekrar,
+			int rol, int brans, String avatar, String telefon, String adres, String mail, Date olusturulmaTarihi,
+			Date degistirmeTarihi, Roller roller, Branslar branslar) {
+		super();
+		this.id = id;
+		this.kullaniciadi = kullaniciadi;
+		this.adi = adi;
+		this.soyadi = soyadi;
+		this.sifre = sifre;
+		this.sifretekrar = sifretekrar;
+		this.rol = rol;
+		this.brans = brans;
+		this.avatar = avatar;
+		this.telefon = telefon;
+		this.adres = adres;
+		this.mail = mail;
+		this.olusturulmaTarihi = olusturulmaTarihi;
+		this.degistirmeTarihi = degistirmeTarihi;
+		this.roller = roller;
+		this.branslar = branslar;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -174,6 +199,22 @@ public class Kullanicilar {
 
 	public void setRoller(Roller roller) {
 		this.roller = roller;
+	}
+
+	public int getBrans() {
+		return brans;
+	}
+
+	public void setBrans(int brans) {
+		this.brans = brans;
+	}
+
+	public Branslar getBranslar() {
+		return branslar;
+	}
+
+	public void setBranslar(Branslar branslar) {
+		this.branslar = branslar;
 	}
 	
 	
