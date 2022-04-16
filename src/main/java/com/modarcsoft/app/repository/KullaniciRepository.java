@@ -1,6 +1,7 @@
 package com.modarcsoft.app.repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +16,9 @@ public interface KullaniciRepository extends JpaRepository<Kullanicilar, Integer
 	Kullanicilar kullaniciadiSifre(String kullaniciadi, String sifre);
 
 	@Query("SELECT k FROM Kullanicilar k Where kullaniciadi =?1")
-	ArrayList<Kullanicilar> getResultsKullaniciadi(Kullanicilar id, String kullaniciadi);
+	ArrayList<Kullanicilar> getResultsKullaniciadi(Kullanicilar k, String kullaniciadi);
+	
+	@Query("SELECT k FROM Kullanicilar k")
+	List<Kullanicilar> tumKullanicilariGetir();
 
 }

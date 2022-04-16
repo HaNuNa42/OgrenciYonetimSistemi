@@ -1,15 +1,16 @@
 package com.modarcsoft.app.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,51 +21,74 @@ import com.modarcsoft.app.service.KullaniciService;
 @Controller
 public class KullaniciController {
 
-	@Autowired
+//	@Autowired
 	private KullaniciService kullaniciService;
-	
 
 	@GetMapping({ "kullanicilar" })
 	public String kullanicilar() {
 		return "kullanicilar";
 	}
 
-	public boolean Kontrol(Kullanicilar kullanici, String kullaniciadi) {
-		
-			System.out.println("burası çalıştı 1");
-		kullanici.setKullaniciadi(kullaniciadi);
-			System.out.println("burası çalıştı 2");
-		ArrayList<Kullanicilar> list = kullaniciService.getResults(kullanici, kullaniciadi);
-			System.out.println("burası çalıştı 3");
-		if (list.size() > 0) {
-			return false; // Daha önce kullanıcı adı eklenmiş.
-		} else {
-			return true; // İlk kullanıcı.
+	
+
+	@RequestMapping(value = "/eklekullanici", method = RequestMethod.POST)
+	public ResponseEntity<String> AddUser(@Valid @RequestBody Kullanicilar kullanici, HttpServletRequest request) {
+		try {
+			kullaniciService.ekleKullanici(kullanici);
+		} catch (Exception e) {
+			System.out.println(e);
 		}
+
+		return new ResponseEntity<>(("Kullanıcı başarıyla güncelleştirildi."), HttpStatus.CREATED);
+
 	}
 
-	
-	@RequestMapping(value = "/eklekullanici", method = RequestMethod.POST)
-	public ResponseEntity<String> AddUser(@RequestBody Kullanicilar kullanici, HttpServletRequest request) {
-		System.out.println("burası çalıştı 4");
-		if (Kontrol(kullanici, kullanici.getKullaniciadi())) {
-			System.out.println("burası çalıştı 5");
-			Long ui = (Long) request.getSession().getAttribute("id");
+	@RequestMapping(value = "/getAllUser", method = RequestMethod.POST)
+	public ArrayList<Kullanicilar> getAllUser( Kullanicilar kullanici, HttpServletRequest request) {
+		
+			kullaniciService.tumKullanicilariGetir(kullanici);
+			System.out.println("hata     :  "+request);
+			
+			return null;
+		
+	}
 
-			kullanici.setOlusturulmaTarihi(new Date());
+	@RequestMapping(value = "/getUser/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Kullanicilar> getUser(@PathVariable(value = "id") int id) {
 
-			Kullanicilar result = kullaniciService.ekleKullanici(kullanici);
-			if (result != null) {
+		try {
+			Kullanicilar us = kullaniciService.getFindById((int) id);
 
-				return new ResponseEntity<>(("Kullanıcı başarıyla oluşturuldu."), HttpStatus.CREATED);
-			} else {
-				return new ResponseEntity<>(("İşlem esnasında hata oluştu."), HttpStatus.FORBIDDEN);
-
-			}
-		} else {
-			return new ResponseEntity<>(
-					("Girmiş olduğunuz Kullanıcı adı daha önce kullanılmıştır. Lütfen farklı Kullanıcı adı adresi giriniz !"),
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(us, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+
+	}
+
+	@RequestMapping(value = "/guncellekullanici", method = RequestMethod.POST)
+	public ResponseEntity<String> UpdateUser(@RequestBody Kullanicilar user, @PathVariable("id") int id,
+			HttpServletRequest request) {
+
+		try {
+
+			kullaniciService.guncelleKullanici(user, id);
+
+		} catch (Exception e) {
+			System.out.println("hata : " + e.toString());
+
+		}
+		return new ResponseEntity<>(("Kullanıcı başarıyla güncelleştirildi."), HttpStatus.CREATED);
+
+	}
+
+	@RequestMapping(value = "/silkullanici", method = RequestMethod.POST)
+	public ResponseEntity<String> DeleteUser(@PathVariable("id") int id, HttpServletRequest request) {
+		try {
+			kullaniciService.silKullanici(id);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return new ResponseEntity<>(("Kullanıcı başarıyla güncelleştirildi."), HttpStatus.CREATED);
 	}
 }

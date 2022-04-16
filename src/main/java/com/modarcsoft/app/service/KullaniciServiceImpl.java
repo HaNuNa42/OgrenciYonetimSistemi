@@ -17,22 +17,25 @@ import com.modarcsoft.app.repository.KullaniciRepository;
 
 @Service
 public class KullaniciServiceImpl implements KullaniciService {
-	
+
 //	private EntityManager entityManager;
 
-	
 	private KullaniciRepository kullaniciRepository;
 
 	@Override
 	public Kullanicilar ekleKullanici(Kullanicilar kullanici) {
 
+		System.out.println(kullanici.toString());
 		return kullaniciRepository.save(kullanici);
 	}
 
 	@Override
-	public List<Kullanicilar> tumKullanicilariGetir() {
+	public List<Kullanicilar> tumKullanicilariGetir(Kullanicilar kullanici) {
+		System.out.println("burası çalıştı 1");
+	 kullaniciRepository.tumKullanicilariGetir();
+		System.out.println("kullanıcılar listeleniyor : ");
+		return null;
 
-		return (List<Kullanicilar>) kullaniciRepository.findAll();
 	}
 
 	@Override
@@ -55,6 +58,7 @@ public class KullaniciServiceImpl implements KullaniciService {
 		}
 
 		return kullaniciRepository.save(kullaniciVT);
+
 	}
 
 	@Override
@@ -64,34 +68,39 @@ public class KullaniciServiceImpl implements KullaniciService {
 
 	@Override
 	public Kullanicilar kullaniciadiSifre(Kullanicilar kullanici) {
-	
+
 		try {
-			System.out.println("doğrulama tamam");
 			return kullaniciRepository.kullaniciadiSifre(kullanici.getKullaniciadi(), kullanici.getSifre());
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("hata :: kullanıcı adı ve şifre hatalı : " + e);
 		}
 		return kullanici;
-		
+
 	}
 
 	@Override
-	public ArrayList<Kullanicilar> getResults(Kullanicilar id, String kullaniciadi) {
+	public ArrayList<Kullanicilar> getResults(Kullanicilar kullanici, String kullaniciadi) {
 		System.out.println("burası çalıştı impl 1");
-		
-		if (id != null) {  
-			 System.out.println("burası çalıştı impl 2");
-			if (id.getKullaniciadi() != null && id.getKullaniciadi() != "") {
+
+		if (kullanici != null) {
+			System.out.println("burası çalıştı impl 2");
+			if (kullanici.getKullaniciadi() != null && kullanici.getKullaniciadi() != "") {
 				System.out.println("burası çalıştı impl 3");
-				((Query) kullaniciRepository).setParameter("kullaniciadi", id.getKullaniciadi());
+				kullaniciRepository.getResultsKullaniciadi(kullanici, kullanici.getKullaniciadi());
 				System.out.println("burası çalıştı impl 4");
+			} else {
+				System.out.println("burası çalıştı impl 5");
 			}
 		}
-		System.out.println("burası çalıştı impl 5");
-		return kullaniciRepository.getResultsKullaniciadi(id, kullaniciadi);
-		
+		System.out.println("burası çalıştı impl 6");
+		return kullaniciRepository.getResultsKullaniciadi(kullanici, kullaniciadi);
+
 	}
-	
-	
-	
+
+	@Override
+	public Kullanicilar getFindById(int id) {
+		kullaniciRepository.getById(id);
+		return null;
+	}
+
 }

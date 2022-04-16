@@ -13,7 +13,7 @@ public interface KullaniciService {
 	Kullanicilar ekleKullanici(Kullanicilar kullanici);
 	
 	//listele
-	List<Kullanicilar> tumKullanicilariGetir();
+	List<Kullanicilar> tumKullanicilariGetir(Kullanicilar kullanici);
 	
 	//güncelle
 	Kullanicilar guncelleKullanici(Kullanicilar kullanici, int id);
@@ -24,7 +24,12 @@ public interface KullaniciService {
 	//kullanici kontrol
 	Kullanicilar kullaniciadiSifre(Kullanicilar kullanici);
 
-	ArrayList<Kullanicilar> getResults(Kullanicilar id, String kullaniciadi);
+	ArrayList<Kullanicilar> getResults(Kullanicilar kullanici, String kullaniciadi);
+
+	//id ye göre kullanici getir
+	Kullanicilar getFindById(int id);
+
+
 
 	
 
